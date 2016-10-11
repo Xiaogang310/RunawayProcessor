@@ -28,7 +28,6 @@ public class Processor extends AbstractProcessor
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv)
     {
         List<BindingSet> bindings = parseTargets(roundEnv);
-        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "Bindings : " + bindings.toString());
         Builder.build(bindings);
 
         return true;

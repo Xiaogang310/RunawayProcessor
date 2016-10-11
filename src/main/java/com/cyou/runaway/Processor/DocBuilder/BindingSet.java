@@ -15,6 +15,8 @@ public class BindingSet extends IBindingSet
     private String mReturn = "\n";
     private String mQuote = " : ";
     private String mDot = " , ";
+    private String mLine = "\t========================\n";
+    private String mStar = "****************************************\n";
 
     public BindingSet(String cmd, List<FunctionInfo> funcInfos)
     {
@@ -22,13 +24,24 @@ public class BindingSet extends IBindingSet
         mFunctionInfos = funcInfos;
     }
 
+    private String buildHeader()
+    {
+        return mStar;
+    }
+
+    private String buildFunctoionSeperator()
+    {
+        return mLine;
+    }
     @Override
     public String buildBinding()
     {
-        String result = buildCommand();
+        String result = buildHeader();
+        result += buildCommand();
 
         for (FunctionInfo info : mFunctionInfos)
         {
+            result += buildFunctoionSeperator();
             result += buildFunction(info);
         }
 
