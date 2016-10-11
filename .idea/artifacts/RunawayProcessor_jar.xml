@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="RunawayProcessor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RunawayProcessor_jar</output-path>
+    <root id="root">
+      <element id="archive" name="RunawayProcessor.jar">
+        <element id="module-output" name="RunawayProcessor" />
+      </element>
+    </root>
+  </artifact>
+</component>
