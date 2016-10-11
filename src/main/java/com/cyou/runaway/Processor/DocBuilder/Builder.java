@@ -19,26 +19,35 @@ public class Builder
             docContent += set.buildBinding();
         }
 
+        docContent += BuildTool.buildSeperator();
+
         generateDoc("runaway.txt", docContent);
     }
 
-    public static void generateDoc(String path, String content)
+    private static void generateDoc(String path, String content)
     {
         if (!createFile(path))
             return;
 
-        try {
+        try
+        {
             FileOutputStream stream = new FileOutputStream(path);
 
-            stream.write(content.getBytes());
-            stream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
+            try
+            {
+                stream.write(content.getBytes());
+                stream.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     private static boolean createFile(String path)

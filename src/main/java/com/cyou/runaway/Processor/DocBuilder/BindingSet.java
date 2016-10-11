@@ -11,12 +11,6 @@ public class BindingSet extends IBindingSet
 {
     private String mCommand;
     private List<FunctionInfo> mFunctionInfos;
-    private String mTable = "\t";
-    private String mReturn = "\n";
-    private String mQuote = " : ";
-    private String mDot = " , ";
-    private String mLine = "\t========================\n";
-    private String mStar = "****************************************\n";
 
     public BindingSet(String cmd, List<FunctionInfo> funcInfos)
     {
@@ -24,65 +18,30 @@ public class BindingSet extends IBindingSet
         mFunctionInfos = funcInfos;
     }
 
-    private String buildHeader()
-    {
-        return mStar;
-    }
-
-    private String buildFunctoionSeperator()
-    {
-        return mLine;
-    }
     @Override
     public String buildBinding()
     {
-        String result = buildHeader();
-        result += buildCommand();
+        String result = BuildTool.buildSeperator();
+        result += BuildTool.buildPair("命令", mCommand, false);
 
         for (FunctionInfo info : mFunctionInfos)
         {
-            result += buildFunctoionSeperator();
+            result += BuildTool.buildTabSeperator();
             result += buildFunction(info);
         }
-
+        result += BuildTool.buildTabSeperator();
         return result;
-    }
-
-    private String buildCommand()
-    {
-        return mCommand + mQuote + mReturn;
     }
 
     private String buildFunction(FunctionInfo info)
     {
         String result = "";
-        result += buildPair("Function", info.getFunctionName());
-        result += buildPair("Description", info.getDescription());
-        result += buildPair("Type", info.getMethodType().toString());
-        result += buildPair("Params", info.getParams());
-        result += buildPair("Return", info.getResult());
+        result += BuildTool.buildPair("函数", info.getFunctionName(), true);
+        result += BuildTool.buildPair("描述", info.getDescription(), true);
+        result += BuildTool.buildPair("类型", info.getMethodType().toString(), true);
+        result += BuildTool.buildPair("参数", info.getParams(), true);
+        result += BuildTool.buildPair("返回值", info.getResult(), true);
 
         return result;
-    }
-
-    private String buildPair(String key, String value)
-    {
-        return  mTable + key + mQuote + value + mReturn;
-    }
-
-    private String buildPair(String key, String[] values)
-    {
-        String line = mTable + key + mQuote;
-
-        for (int i = 0; i < values.length; ++i)
-        {
-            line += values[i];
-            if (values.length - 1 != i)
-                line += mDot;
-        }
-
-        line += mReturn;
-
-        return line;
     }
 }

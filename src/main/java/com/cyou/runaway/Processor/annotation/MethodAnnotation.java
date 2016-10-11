@@ -14,16 +14,16 @@ public @interface MethodAnnotation
 {
     enum Method_Type
     {
-        MT_CALL,
-        MT_GET,
-        MT_POST,
+        Call,
+        Get,
+        Post,
     }
 
-    public String description();
+    String description();
 
-    public Method_Type type();
+    Method_Type type();
 
-    public String[] params() default {};
+    String[] params() default {};
 
-    public String result() default "void";
+    String result() default "void";
 }
