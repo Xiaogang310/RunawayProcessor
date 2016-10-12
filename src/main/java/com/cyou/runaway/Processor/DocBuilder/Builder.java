@@ -13,7 +13,8 @@ public class Builder
         if (bindings.isEmpty())
             return;
 
-        String docContent = "";
+        String docContent = DocDescription.msDescription;
+
         for (IBindingSet set : bindings)
         {
             docContent += set.buildBinding();
